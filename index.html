@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ukr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <template>
+    <div class="group">
+    <input type="checkbox" class="checkbox">
+      <h2>
+        {{checkbox_text}}
+      </h2>
+    </div>
+  </template>
   <h1>
     Моє життя!
   </h1>
-  <div class="block">
-    <div class="group">
+  <div class="checkboxes">
+    <!-- <div class="group">
       <input type="checkbox" id="checkbox1" class="checkbox">
       <h2>
         Я вчуся на програміста.
@@ -28,11 +36,12 @@
       <h2>
         Моя психіка - стабільна.
       </h2>
-    </div>
+    </div> -->
   </div>
   <div class="under">
     Created by <a href="https://liubquanti.click/">liubquanti</a>.
   </div>
+  <script src="mustache.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

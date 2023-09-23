@@ -1,55 +1,38 @@
+const maxChecked = 3;
+const checkboxesText = ["Я вчуся на програміста.", "У мене є дівчина/хлопець.", "Моя психіка - стабільна.", "Я у мами молодець"];
+
+
 document.addEventListener('DOMContentLoaded', function() {
-  const checkbox1 = document.getElementById('checkbox1');
-  const checkbox2 = document.getElementById('checkbox2');
-  const checkbox3 = document.getElementById('checkbox3');
+  let template = document.querySelector("template").innerHTML;
+  const checkboxes = document.querySelector(".checkboxes");
+  for (let checkboxText of checkboxesText)
+  {
+    let renderedHtml = Mustache.render(template, {checkbox_text: checkboxText});
+    checkboxes.innerHTML += renderedHtml;
+  }
+  let last;
 
-  let last = 0;
+  checkboxes.addEventListener("click", (e) =>
+  {
+    let clicked = e.target;
+    if (!clicked.classList.contains("checkbox")) return;
 
-  checkbox1.addEventListener('change', function() {
-      if (this.checked) {
-        if (checkbox3.checked) {
-          checkbox2.checked = false;
-        } else {
-            
-        }
-      } else {
-        if (checkbox2.checked) {
-          checkbox3.checked = false;
-        } else {
-            
-        }
-      }
+    if (checkedCount() > maxChecked)
+    {
+      last.checked = false;
+    }
+    last = clicked;
   });
 
-  checkbox2.addEventListener('change', function() {
-      if (this.checked) {
-        if (checkbox1.checked) {
-          checkbox3.checked = false;
-        } else {
-
-        }
-      } else {
-        if (checkbox3.checked) {
-          checkbox1.checked = false;
-        } else {
-            
-        }
-      }
-  });
-
-  checkbox3.addEventListener('change', function() {
-      if (this.checked) {
-        if (checkbox2.checked) {
-          checkbox1.checked = false;
-        } else {
-            
-        }
-      } else {
-        if (checkbox1.checked) {
-          checkbox2.checked = false;
-        } else {
-            
-        }
-      }
-  });
+  function checkedCount()
+  {
+    let result = 0;
+    for (const child of checkboxes.children)
+    {
+      let childCheckBox = child.querySelector(".checkbox");
+      if (childCheckBox.checked)
+        result++;
+    }
+    return result;
+  }
 });
