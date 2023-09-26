@@ -1,5 +1,8 @@
 const maxChecked = 3;
-const checkboxesText = ["Я вчуся на програміста.", "У мене є дівчина/хлопець.", "Моя психіка - стабільна.", "Я у мами молодець"];
+const checkboxesText = ["Я вчуся на програміста.",
+"У мене є дівчина/хлопець.",
+"Моя психіка - стабільна.",
+"Я у мами молодець"];
 
 
 document.addEventListener('DOMContentLoaded', function() {
