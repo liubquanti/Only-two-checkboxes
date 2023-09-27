@@ -1,19 +1,26 @@
-const maxChecked = 2;
-const checkboxesText = ["Я вчуся на програміста.",
-"У мене є дівчина/хлопець.",
-"Моя психіка - стабільна.",
-"penis"];
-const listLen = checkboxesText.length;
+const form = document.querySelector("#form");
+form.addEventListener("submit", generateForm);
 let history = [];
+const checkboxes = document.querySelector(".checkboxes");
+let maxChecked;
+let listLen = 0;
 
-document.addEventListener('DOMContentLoaded', function() {
-  let template = document.querySelector("template").innerHTML;
-  const checkboxes = document.querySelector(".checkboxes");
-  for (let checkboxText of checkboxesText)
-  {
-    let renderedHtml = Mustache.render(template, {checkbox_text: checkboxText});
-    checkboxes.innerHTML += renderedHtml;
-  }
+function generateForm(e)
+{
+  e.preventDefault();
+  let form = e.target;
+  maxChecked = +form.maxChecked.value;
+  const checkboxesText = form.options.value.split("\n");
+  listLen = checkboxesText.length;
+    let template = document.querySelector("template").innerHTML;
+    for (let checkboxText of checkboxesText)
+    {
+      let renderedHtml = Mustache.render(template, {checkbox_text: checkboxText});
+      checkboxes.innerHTML += renderedHtml;
+    }
+    form.hidden = true;
+}
+
 
   checkboxes.addEventListener("click", (e) =>
   {
@@ -48,4 +55,3 @@ document.addEventListener('DOMContentLoaded', function() {
   //   }
   //   return result;
   // }
-});
