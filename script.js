@@ -1,9 +1,9 @@
-const maxChecked = 3;
+const maxChecked = 2;
 const checkboxesText = ["Я вчуся на програміста.",
 "У мене є дівчина/хлопець.",
-"Моя психіка - стабільна.",
-"Я у мами молодець"];
-
+"Моя психіка - стабільна."];
+const len = checkboxesText.len;
+let history = [];
 
 document.addEventListener('DOMContentLoaded', function() {
   let template = document.querySelector("template").innerHTML;
@@ -13,18 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
     let renderedHtml = Mustache.render(template, {checkbox_text: checkboxText});
     checkboxes.innerHTML += renderedHtml;
   }
-  let last;
 
   checkboxes.addEventListener("click", (e) =>
   {
     let clicked = e.target;
     if (!clicked.classList.contains("checkbox")) return;
 
+    if (clicked.checked)
+    {
+      history.push(clicked);
+      if (history.len === len)
+        history.shift()
+    }
+    console.log(clicked.checked);
     if (checkedCount() > maxChecked)
     {
       last.checked = false;
     }
-    last = clicked;
   });
 
   function checkedCount()
