@@ -1,8 +1,9 @@
 const maxChecked = 2;
 const checkboxesText = ["Я вчуся на програміста.",
 "У мене є дівчина/хлопець.",
-"Моя психіка - стабільна."];
-const len = checkboxesText.len;
+"Моя психіка - стабільна.",
+"penis"];
+const listLen = checkboxesText.length;
 let history = [];
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -22,25 +23,29 @@ document.addEventListener('DOMContentLoaded', function() {
     if (clicked.checked)
     {
       history.push(clicked);
-      if (history.len === len)
-        history.shift()
+      if (history.length == maxChecked + 1)
+      {
+        history.shift().checked = false;
+      }
+      console.log(history);
+    }
+    else
+    {
+      const index = history.indexOf(clicked);
+      history.splice(index, 1);
     }
     console.log(clicked.checked);
-    if (checkedCount() > maxChecked)
-    {
-      last.checked = false;
-    }
   });
 
-  function checkedCount()
-  {
-    let result = 0;
-    for (const child of checkboxes.children)
-    {
-      let childCheckBox = child.querySelector(".checkbox");
-      if (childCheckBox.checked)
-        result++;
-    }
-    return result;
-  }
+  // function checkedCount()
+  // {
+  //   let result = 0;
+  //   for (const child of checkboxes.children)
+  //   {
+  //     let childCheckBox = child.querySelector(".checkbox");
+  //     if (childCheckBox.checked)
+  //       result++;
+  //   }
+  //   return result;
+  // }
 });
